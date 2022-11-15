@@ -1,0 +1,59 @@
+
+################################################################################
+# DACSS 695: Survey Research Methods                                           #
+# Carey E. Stapleton                                                           #
+# University of Massachusetts Amherst                                          #
+# cstapleton@umass.edu                                                         #
+# Base Weights                                                                 #
+# Last update: 11/11/22                                                        #
+################################################################################
+
+n<-1200 #Sample size desired 
+addresses<-10000 #Number of housing units in sampling frame 
+
+overall_prob<-n/addresses #With SRS, probability of selection into sample 
+
+#target population breakdown by urban, suburban, and rural residencies.Wwith SRS, we would sample on average 
+urban<-.6
+suburban<-.3
+rural<-.1
+
+sample<-n*(c(urban, suburban, rural))
+print(sample)
+
+#Desired N by Address Type (500, 350, 350)
+urban_d<-500
+suburban_d<-350
+rural_d<-350
+
+#Total Addresses in Sampling Frame by Location Type
+urban_n<-addresses*urban
+suburban_n<-addresses*suburban
+rural_n<-addresses*rural
+
+print (c(urban_n, suburban_n, rural_n))
+
+#New Probability of Selection with Oversampling Approach by Location Type 
+urban_prob<-urban_d/urban_n
+suburban_prob<-suburban_d/suburban_n
+rural_prob<-rural_d/rural_n
+
+print (c(overall_prob, urban_prob, suburban_prob, rural_prob))
+
+#If SRS, Sample Size by Location Type 
+urban_raw<-urban*n
+suburban_raw<-suburban*n
+rural_raw<-rural*n
+print(c(urban_raw, suburban_raw, rural_raw)) # Prints SRS sample size
+print(c(urban_d, suburban_d, rural_d)) # Prints oversampling sample size
+
+
+####Calculate Base weight 
+########################% of the target population/% of the sample = standard formula for oversampling base weight 
+urban_bw<-urban/urban_prob
+suburban_bw<-suburban/suburban_prob
+rural_bw<-rural/rural_prob
+
+print(c(urban_bw, suburban_bw, rural_bw)) #Prints the base weight by location type 
+
+
