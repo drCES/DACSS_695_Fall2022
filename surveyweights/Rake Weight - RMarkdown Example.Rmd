@@ -84,6 +84,24 @@ sum(age_group) #proportions should = 1 so this checks that it does
 
 ```
 
+First, let's look at the unweighted values in both the age and sex variables. 
+
+```{r}
+#Shows the unweighted size of the age_group demographics
+sample %>%
+  group_by(age_group) %>%
+  summarise(n = n()) %>% 
+  mutate(proportion = n /sum(n))
+
+#Shows the unweighted size of the sex demographics
+sample %>%
+  group_by(sex) %>%
+  summarise(n = n()) %>% 
+  mutate(proportion = n /sum(n))
+
+```
+
+
 
 ## 3. Calculating Your Rake Weights  
 
